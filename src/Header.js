@@ -1,7 +1,7 @@
-import React from 'react'
-import img from '../src/amazon-icon.jpg'
-import img1 from '../src/amazon-dark.png'
-import './Header.css'
+import React from 'react';
+import img from '../src/amazon-icon.jpg';
+import img1 from '../src/amazon-dark.png';
+import './Header.css';
 
 function Header() {
   return (
