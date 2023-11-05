@@ -8,16 +8,21 @@ function App() {
   return (
     <Router>
     <div className="app">
-     <Switch to="/login">
-    {/* <h2>Login</h2> */}
-     </Switch>
-     <Switch to="/checkout">
-   
-     </Switch>
-     <Switch to="/">
+     <Switch>
+
+      <Route path="/login">
+    {/* <h1>Login</h1> */}
+    </Route>
+
+     <Route path="/checkout">
+     {/* <h1>Login</h1> */}
+     </Route>
+
+     <Route path="/">
         <Header />
-        <h1>HOME PAGE!!</h1>
-     </Switch>
+     </Route>
+
+    </Switch>
     </div>
     </Router>
   );
