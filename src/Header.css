@@ -1,4 +1,19 @@
 
+.header{
+    background-color: black;
+    display: flex;
+    align-items: center;
+    /* flex-direction: row; */
+}
 .header_logo{
-    width: 100px
+    width: 100px;
+    margin-top:18px;
+    margin-left:20px;
+    margin-right:20px;
+}
+.header_search{
+    display: flex;
+}
+.header_searchIcon{
+    background-color: orange;
 }

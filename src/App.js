@@ -9,13 +9,14 @@ function App() {
     <Router>
     <div className="app">
      <Switch to="/login">
-        <h1>Login</h1>
+    {/* <h2>Login</h2> */}
      </Switch>
      <Switch to="/checkout">
-      <h3>Checkout</h3>
+   
      </Switch>
      <Switch to="/">
         <Header />
+        <h1>HOME PAGE!!</h1>
      </Switch>
     </div>
     </Router>
