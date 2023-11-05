@@ -4,6 +4,7 @@ import img1 from '../src/amazon-dark.png';
 import './Header.css';
 import {Link} from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 
 function Header() {
   return (
@@ -24,27 +25,34 @@ function Header() {
         {/* 1st Link */}
        <Link to ="/login" className="header_link">
        <div className="header_option">
-       <span>hello Gungun</span>
-       <span>Sign in</span>
+       <span className="header_optionLineOne">hello Gungun</span>
+       <span  className="header_optionLineTwo">Sign in</span>
        </div>
        </Link>
         {/* 2ND Link */}
         <Link to ="/" className="header_link">
        <div className="header_option">
-       <span>Returns</span>
-       <span>& Orders</span>
+       <span className="header_optionLineOne">Returns</span>
+       <span  className="header_optionLineTwo">& Orders</span>
        </div>
        </Link>
 
         {/* 3rd Link */}
         <Link to ="/" className="header_link">
        <div className="header_option">
-       <span>Your</span>
-       <span>Prime</span>
+       <span className="header_optionLineOne">Your</span>
+       <span className="header_optionLineTwo">Prime</span>
        </div>
        </Link>
       {/* basket icon with number of items added */}
-     
+      <Link to ="/checkout">
+      <div className="header_optionbasket">
+        {/* shopping basket icon */}
+        <ShoppingBasketIcon/>
+        {/* no of items in the basket */}
+        <span>0</span>
+        </div>
+        </Link>
       </div>
     </nav>
   )
