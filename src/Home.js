@@ -4,6 +4,7 @@ import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import  images  from  "./slider-images";
 import Product from './Product';
+import './Home.css';
 
 function Home() {
   return (
@@ -22,6 +23,8 @@ function Home() {
         
         {/* <img style={{width:"100%", height:"1%"}} src={img2} alt="banner photo" /> */}
         {/* product id,image ,rating,name */}
+        
+        <div className = "home_row">
         <Product 
                     id = "12314"
                     title = "Macbook Pro"
@@ -29,6 +32,7 @@ function Home() {
                     rating = {5}
                     image = "https://images-na.ssl-images-amazon.com/images/I/71YRSVXhgQL._SX679_.jpg"
                 />
+               
          <Product 
                     id = "12315"
                     title = "OnePlus Nord"
@@ -36,6 +40,8 @@ function Home() {
                     rating = {5}
                     image = "https://images-na.ssl-images-amazon.com/images/I/71gag816F7L._SL1500_.jpg"
                 />
+                 </div>
+                 <div className = "home_row">
                  <Product 
                     id = "12316"
                     title = "Amazon Echo"
@@ -57,6 +63,17 @@ function Home() {
                     rating = {5}
                     image = "https://images-na.ssl-images-amazon.com/images/I/71D89swgrvL._SL1500_.jpg"
                 />
+                </div>
+                <div className="home__row">
+                <Product 
+                    id = "12319"
+                    title = "Puma Unisex's Escaper Pro Core Running Shoes"
+                    price = {2500}
+                    rating = {5}
+                    image = "https://images-na.ssl-images-amazon.com/images/I/813zj-065jL._UL1500_.jpg"
+                />
+                </div>
+
     </div>
   )
 }
