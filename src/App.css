@@ -1,3 +1,4 @@
+ /* react has a weird stuff of adding default margins therfore we will tackle this by removing the default css and setting margin as 0px */
 * {
   margin:0;
 }
