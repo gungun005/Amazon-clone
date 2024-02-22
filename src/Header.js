@@ -6,10 +6,11 @@ import {Link} from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { useStateValue } from './StateProvider';
+import { ChangeEvent, useState } from "react";
 
 function Header() {
     const [{ basket,user}] = useStateValue();
-
+    const [state, setState] = useState("");
     console.log(basket);
   return (
     <nav className='header'>
@@ -20,10 +21,13 @@ function Header() {
         alt="amazon_logo" />
     </Link>
       {/* search box */}
-      <div className="header_search">
-      <input type="text" className="header_searchInput" />
-      <SearchIcon className="header_searchIcon"/>
-      </div>
+      <div className="header_search" id="search_entry">
+      <input type="text" className="header_searchInput"  id={'my-input'} placeholder={'Type here'}    onChange={event => {
+     setState(event.target.value)
+    }} ></input>
+      <SearchIcon className="header_searchIcon" />
+      {/* console.log({state}); */}
+</div>
       {/* three links  */}
       <div className="header_nav">
         {/* 1st Link */}
@@ -59,6 +63,7 @@ function Header() {
         </Link>
       </div>
     </nav>
+  
   )
 }
 

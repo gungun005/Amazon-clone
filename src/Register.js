@@ -1,12 +1,51 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom'; 
+import axios from 'axios';
 // // import { auth } from './firebase';
 
 function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const handleNameChange = (e) => setName(e.target.value);
+    const handleEmailChange = (e) => setEmail(e.target.value);
+    const handlePasswordChange = (e) => setPassword(e.target.value);
+  
+    // Accessing values
+    const handleSubmit = (e) => {
+      // You can now access the values of name, email, and password
+      console.log("Name:", name);
+      console.log("Email:", email);
+      console.log("Password:", password);
+  
+      // Perform other actions, like submitting the form or making API calls
+    };
+    handleSubmit();
+  
+   const postdata=async()=>
+    {
+        const mydata={
+            name:name,
+            email:email,
+            password:password
+        }
+       const url=await fetch ('http://localhost:8100/user/register',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(mydata)
+       })
+       .then (response=>{
+        console.log("response",response);
+        if(response.state==200)
+        alert("success");
+       }).catch(e=>{
+        console.log("e",e);
+       })
+    }
+   
     return (
         <div className = "register">
             <Link to="/home">
@@ -21,13 +60,12 @@ function Register() {
                 <h1>Create Account</h1>
                 <form>
                    <h5>Your name</h5>
-                    <input value={name} onChange={event => setName(event.target.value)} type="name"/>
+                    <input value={name} onChange={handleNameChange} type="name"/>
                     <h5>E-mail</h5>
-                    <input value={email} onChange={event => setEmail(event.target.value)} type="email"/>
+                    <input value={email} onChange={ handleEmailChange } type="email"/>
                     <h5>Password</h5>
-                    <input value={password} onChange={event =>
-                    setPassword(event.target.value)} type="password"/>
-                    <button 
+                    <input value={password} onChange={handlePasswordChange} type="password"/>
+                    <button onClick={postdata}
                     type="submit" className="register__signUpButton">Sign UP</button>
                 </form>
                 <p>
@@ -37,6 +75,7 @@ function Register() {
 
         </div>
     );
+
 }
 
 export default Register;
