@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom'; 
 import axios from 'axios';
@@ -11,26 +11,18 @@ function Register() {
     const handleNameChange = (e) => setName(e.target.value);
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
-  
-    // Accessing values
-    const handleSubmit = (e) => {
-      // You can now access the values of name, email, and password
-      console.log("Name:", name);
-      console.log("Email:", email);
-      console.log("Password:", password);
-  
-      // Perform other actions, like submitting the form or making API calls
-    };
-    handleSubmit();
+    const bcrypt=require("bcryptjs");
+    const saltrounds=10;
   
    const postdata=async()=>
     {
+        const hashedPassword = await bcrypt.hash(password, saltrounds);
         const mydata={
             name:name,
             email:email,
-            password:password
+            password:hashedPassword
         }
-       const url=await fetch ('http://localhost:8100/user/register',{
+       const url=await fetch ('http://localhost:8010/register',{
         method:'POST',
         headers:{
             'Content-Type':'application/json'

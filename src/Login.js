@@ -7,7 +7,36 @@ import { Link } from 'react-router-dom';
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-  
+    const handleEmailChange = (e) => setEmail(e.target.value);
+    const handlePasswordChange = (e) => setPassword(e.target.value);
+    const bcrypt=require("bcryptjs");
+    const saltrounds=10;
+    const postdata=async()=>
+    {
+        const hashedPassword = await bcrypt.hash(password, saltrounds);
+        const mydata={
+            email:email,
+            password:hashedPassword
+        }
+        // });
+      
+       const url=await fetch ('http://localhost:8010/login',{
+
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(mydata)
+       })
+       .then (response=>{
+        console.log("response",response);
+        if(response.state==200)
+        alert("success");
+       }).catch(e=>{
+        console.log("e",e);
+            })
+    }
+   
     return (
         <div className = "login">
             <Link to="/home">
@@ -22,18 +51,17 @@ function Login() {
                 <h1>Sign in</h1>
                 <form>
                     <h5>E-mail</h5>
-                    <input value={email} onChange={event => setEmail(event.target.value)} type="email"/>
+                    <input value={email} onChange={handleEmailChange} type="email"/>
                     <h5>Password</h5>
-                    <input value={password} onChange={event =>
-                    setPassword(event.target.value)} type="password"/>
-                    <button 
+                    <input value={password} onChange={handlePasswordChange} type="password"/>
+                    <button onClick={postdata}
                     type="submit" className="login__signInButton">Sign IN</button>
                 </form>
                 <p>
                 By continuing, you agree to Amazon's Conditions of Use and Privacy Notice. 
                 </p>
                 <Link to='/register'>
-                <button 
+                <button  
                 className="login__registerButton">Create your Amazon Account.</button>
                 </Link>
             </div>
