@@ -15,16 +15,14 @@ function App() {
     <Router>
     <div className="app">
      <Switch>
-
       <Route path="/login">
-      <Login/>
-      <Register/>
-    </Route>
+        <Login/>
+      </Route>
 
      <Route path="/checkout">
-     {/* <h1>Login</h1> */}
-     <Header />
-     <Checkout />
+      {/* <h1>Login</h1> */}
+      <Header />
+      <Checkout />
      </Route>
 
      <Route path="/register">

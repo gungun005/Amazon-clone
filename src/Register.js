@@ -11,17 +11,18 @@ function Register() {
     const handleNameChange = (e) => setName(e.target.value);
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
-    const bcrypt=require("bcryptjs");
-    const saltrounds=10;
+    // const bcrypt=require("bcryptjs");
+    // const saltrounds= bcrypt.genSaltSync(10);
   
    const postdata=async()=>
     {
-        const hashedPassword = await bcrypt.hash(password, saltrounds);
+        // const textpassword=password;
+        // const hashedPassword = await bcrypt.hashSync(password, saltrounds);
         const mydata={
             name:name,
             email:email,
-            password:hashedPassword
-        }
+            password:password
+        } 
        const url=await fetch ('http://localhost:8010/register',{
         method:'POST',
         headers:{
@@ -37,6 +38,7 @@ function Register() {
         console.log("e",e);
        })
     }
+   
    
     return (
         <div className = "register">

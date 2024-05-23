@@ -7,11 +7,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { useStateValue } from './StateProvider';
 import { ChangeEvent, useState } from "react";
+import { Button } from '@mui/material';
 
 function Header() {
     const [{ basket,user}] = useStateValue();
-    const [state, setState] = useState("");
-    console.log(basket);
+    const [searchBarText, setSearchBarText] = useState("");
+    //console.log(basket);
   return (
     <nav className='header'>
     <Link to ="/">
@@ -22,12 +23,12 @@ function Header() {
     </Link>
       {/* search box */}
       <div className="header_search" id="search_entry">
-      <input type="text" className="header_searchInput"  id={'my-input'} placeholder={'Type here'}    onChange={event => {
-     setState(event.target.value)
-    }} ></input>
-      <SearchIcon className="header_searchIcon" />
+        <input type="text" className="header_searchInput"  id={'my-input'} placeholder={'Type here'} onChange={event => {setSearchBarText(event.target.value)}} />
+        <button onClick={console.log(searchBarText)}>
+          <SearchIcon className="header_searchIcon"/>
+        </button>
       {/* console.log({state}); */}
-</div>
+      </div>
       {/* three links  */}
       <div className="header_nav">
         {/* 1st Link */}

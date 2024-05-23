@@ -1,42 +1,76 @@
 import React, { useState } from 'react';
 import './Login.css';
-import {register} from './Register'
+const axios = require('axios');
+//import { useHistory } from 'react-router-dom'
+// import {register} from './Register'
 import { Link } from 'react-router-dom'; 
 // // import { auth } from './firebase';
 
 function Login() {
+    
+    //const history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
-    const bcrypt=require("bcryptjs");
-    const saltrounds=10;
-    const postdata=async()=>
-    {
-        const hashedPassword = await bcrypt.hash(password, saltrounds);
+    // const bcrypt=require("bcryptjs");
+    // const salt = bcrypt.genSaltSync(10);
+
+    // const fetchData = async (requestBody) => {
+    //     const response = axios.get('http://localhost:8010/login', requestBody);
+    //     console.log(response);
+    //     return response;
+    // }
+
+    // const postData = () => {
+    //     const requestBody = {
+    //         email,
+    //         password
+    //     }
+    //     console.log('My data ');
+    //     console.log(requestBody);
+    //     const result = fetchData(requestBody);
+    //     console.log(result);
+    // }
+
+    const postdata = async() => { 
+        //  e.preventDefault();
+        // const hashedPassword = await bcrypt.hashSync(password, salt);
         const mydata={
             email:email,
-            password:hashedPassword
+            password:password
         }
         // });
-      
-       const url=await fetch ('http://localhost:8010/login',{
-
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(mydata)
-       })
-       .then (response=>{
-        console.log("response",response);
-        if(response.state==200)
-        alert("success");
-       }).catch(e=>{
-        console.log("e",e);
-            })
+        console.log('My data logged : ')
+        console.log(mydata)
+        const response = await fetch ('http://localhost:8010/login',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(mydata)
+        })
+        console.log("hi its me!");
+        const data = response.json();
+        console.log(data);
+        console.log(data.success);
+        try{
+        if (data.success) {
+            console.log("logged in succesful");
+            history.push('/');
+            // Login successful
+        } else {
+            // Handle login failure
+            console.error('Login failed:', data.message);
+            return false;
+        }
+        }
+        catch (error) {
+            console.error('Error during login:', error.message);
+            return false;
+        }
     }
-   
+
     return (
         <div className = "login">
             <Link to="/home">

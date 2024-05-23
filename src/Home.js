@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import img2 from '../src/Bannerphoto.jpg';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
@@ -7,6 +8,22 @@ import Product from './Product';
 import './Home.css';
 
 function Home() {
+    const [productList, setProductList] = useState([]);
+
+    useEffect(() => {
+        async function invokeInventoryGetAllAPI (requestBody) {
+            console.log("Calling from API");
+            const response = await axios.get('http://localhost:8700/search', requestBody);
+            console.log(response);
+            setProductList(response.data)
+        };
+        console.log("Triggering useEffect");
+         let requestBody = {
+            "name" : "chocolate"
+        };
+        invokeInventoryGetAllAPI(requestBody);
+    }, [])
+
   return (
     <div className='home'>
         <Slider autoplay={1297} >
@@ -18,61 +35,20 @@ function Home() {
 
                     </div>
                 ))}
-
         </Slider>
-        
-        {/* <img style={{width:"100%", height:"1%"}} src={img2} alt="banner photo" /> */}
-        {/* product id,image ,rating,name */}
-        
-        <div className = "home_row">
-        <Product 
-                    id = "12314"
-                    title = "Macbook Pro"
-                    price = {175000}
-                    rating = {5}
-                    image = "https://images-na.ssl-images-amazon.com/images/I/71YRSVXhgQL._SX679_.jpg"
-                />
-               
-         <Product 
-                    id = "12315"
-                    title = "OnePlus Nord"
-                    price = {27000}
-                    rating = {5}
-                    image = "https://images-na.ssl-images-amazon.com/images/I/71gag816F7L._SL1500_.jpg"
-                />
-                 </div>
-                 <div className = "home_row">
-                 <Product 
-                    id = "12316"
-                    title = "Amazon Echo"
-                    price = {7500}
-                    rating = {4}
-                    image = "https://media.very.co.uk/i/very/P6LTG_SQ1_0000000071_CHARCOAL_SLf?$300x400_retinamobilex2$"
-                />
-                <Product 
-                    id = "12317"
-                    title = "Fit Bit"
-                    price = {11999}
-                    rating = {5}
-                    image = "https://images-na.ssl-images-amazon.com/images/I/71Swqqe7XAL._AC_SX466_.jpg"
-                />
-                     <Product 
-                    id = "12318"
-                    title = "OnePlus Q1 Series 4K"
-                    price = {85000}
-                    rating = {5}
-                    image = "https://images-na.ssl-images-amazon.com/images/I/71D89swgrvL._SL1500_.jpg"
-                />
-                </div>
-                <div className="home__row">
-                <Product 
-                    id = "12319"
-                    title = "Puma Unisex's Escaper Pro Core Running Shoes"
-                    price = {2500}
-                    rating = {5}
+
+        <div className="home__row">
+            {productList.map((product) => {
+                return (<Product 
+                    id = "19297"
+                    title = {product.name}
+                    price = {product.price}
+                    rating = {product.rating}
                     image = "https://images-na.ssl-images-amazon.com/images/I/813zj-065jL._UL1500_.jpg"
-                />
-                </div>
+                />)
+                })
+            }
+        </div>
 
     </div>
   )
