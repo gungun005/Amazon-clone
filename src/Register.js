@@ -7,20 +7,21 @@ import axios from 'axios';
 function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [dob,setDob]=useState(" ");
     const [password, setPassword] = useState("");
     const handleNameChange = (e) => setName(e.target.value);
     const handleEmailChange = (e) => setEmail(e.target.value);
+    const handleDobChange = (e) => setDob(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
-    // const bcrypt=require("bcryptjs");
-    // const saltrounds= bcrypt.genSaltSync(10);
+
   
    const postdata=async()=>
     {
-        // const textpassword=password;
-        // const hashedPassword = await bcrypt.hashSync(password, saltrounds);
+        
         const mydata={
             name:name,
             email:email,
+            dob:dob,
             password:password
         } 
        const url=await fetch ('http://localhost:8010/register',{
@@ -57,6 +58,8 @@ function Register() {
                     <input value={name} onChange={handleNameChange} type="name"/>
                     <h5>E-mail</h5>
                     <input value={email} onChange={ handleEmailChange } type="email"/>
+                    <h5>DOB</h5>
+                    <input value={email} onChange={ handleDobChange } type="dob"/>
                     <h5>Password</h5>
                     <input value={password} onChange={handlePasswordChange} type="password"/>
                     <button onClick={postdata}
