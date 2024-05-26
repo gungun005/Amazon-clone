@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import './Login.css';
-const axios = require('axios');
-//import { useHistory } from 'react-router-dom'
-// import {register} from './Register'
 import { Link } from 'react-router-dom'; 
+import './Login.css';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom'
+// import {register} from './Register'
 // // import { auth } from './firebase';
 
 function Login() {
     
-    //const history = useHistory();
+    const history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handleEmailChange = (e) => setEmail(e.target.value);
@@ -43,25 +43,20 @@ function Login() {
         // });
         console.log('My data logged : ')
         console.log(mydata)
-        const response = await fetch ('http://localhost:8010/login',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify(mydata)
-        })
-        console.log("hi its me!");
-        const data = response.json();
-        console.log(data);
-        console.log(data.success);
+        const response = await axios.post('http://localhost:8010/login',{
+            email:email,
+            password:password
+        });
+        console.log(response);
         try{
-        if (data.success) {
+        if (response) {
             console.log("logged in succesful");
+            alert("login successful!");
             history.push('/');
             // Login successful
         } else {
             // Handle login failure
-            console.error('Login failed:', data.message);
+            console.error('Login failed:', response.message);
             return false;
         }
         }
@@ -69,6 +64,13 @@ function Login() {
             console.error('Error during login:', error.message);
             return false;
         }
+    }
+    
+    const handleSubmit =async (event) => {
+        event.preventDefault();
+        const loginRequest = await postdata();
+        console.log("Login result in handle submit")
+        console.log(loginRequest);
     }
 
     return (
@@ -83,13 +85,13 @@ function Login() {
 
             <div className="login__container">
                 <h1>Sign in</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <h5>E-mail</h5>
                     <input value={email} onChange={handleEmailChange} type="email"/>
                     <h5>Password</h5>
                     <input value={password} onChange={handlePasswordChange} type="password"/>
-                    <button onClick={postdata}
-                    type="submit" className="login__signInButton">Sign IN</button>
+                    <button type="submit" className="login__signInButton">
+                        Sign IN</button>
                 </form>
                 <p>
                 By continuing, you agree to Amazon's Conditions of Use and Privacy Notice. 

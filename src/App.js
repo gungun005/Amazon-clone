@@ -29,6 +29,11 @@ function App() {
       <Register/>
      </Route>
 
+     <Route path="/user">
+      <Header/>
+      <Login/>
+     </Route>
+
      <Route path="/">
      <Header/>
      <Home/>
