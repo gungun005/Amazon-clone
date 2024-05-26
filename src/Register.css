@@ -13,6 +13,7 @@
     padding: 20px;
     border:1px solid lightgray;
     height: fit-content;
+    scroll-behavior:auto;
 }
 
 .register__container > h1{
