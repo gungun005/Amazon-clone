@@ -115,8 +115,8 @@ function Register() {
   //       invokeCreateAuthAPI();
   //     }
   //   }, []);
-
-  const createUser = () => {
+  
+  const createUser = (requestBody) => {
     async function invokeCreateUserAPI(requestBody) {
       console.log("Calling from API");
       const createUserResponse = await axios.post(
@@ -131,9 +131,7 @@ function Register() {
           console.log("Calling from API");
           console.log(requestBody);
           const response = await axios.post("http://localhost:8010/register", {
-            name: name,
             email: email,
-            dob: dob,
             password: password,
           });
           console.log(response);
@@ -148,12 +146,7 @@ function Register() {
         return createAuthResponse;
       }
     }
-    let requestBody = {
-      name: name,
-      email: email,
-      dob: dob,
-      password: password,
-    };
+  
     let createUserResponse = invokeCreateUserAPI(requestBody);
     // console.log("i m create User response");
 
@@ -164,7 +157,17 @@ function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createUser();
+    let requestBody = {
+        name: name,
+        email: email,
+        dob: dob,
+        address:address,
+        city:city,
+        states:states,
+        pincode:pincode,
+        mob:mobileno
+      };
+    createUser(requestBody);
   };
 
   return (

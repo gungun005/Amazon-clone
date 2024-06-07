@@ -1,6 +1,7 @@
 import React from 'react';
 import img from '../src/amazon-icon.jpg';
 import img1 from '../src/amazon-dark.png';
+import logo from '../src/amazonLogo.png';
 import './Header.css';
 import {Link} from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
@@ -17,8 +18,8 @@ function Header() {
     <nav className='header'>
     <Link to ="/">
       {/* {/* logo on left->img  */}
-      <img className='header_logo'
-       src={img1}
+      <img className='header_logo' width={"40px"} height={"20px"}
+        src={logo}
         alt="amazon_logo" />
     </Link>
       {/* search box */}

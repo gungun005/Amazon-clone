@@ -27,9 +27,9 @@ function Product({id,title,price,rating,image}) {
       </p>
       <div className="product_rating">
         {
-            Array(rating)
+            Array({rating})
             .fill()
-            .map((_)=>(
+            .map((_, i)=>(
                 <p>🌟️</p>
             ))
         }

@@ -32,7 +32,6 @@ function Home() {
                         <section className = "home__image">
                             <img src={item.image} alt="" />
                         </section>
-
                     </div>
                 ))}
         </Slider>
@@ -44,7 +43,7 @@ function Home() {
                     title = {product.name}
                     price = {product.price}
                     rating = {product.rating}
-                    image = "https://images-na.ssl-images-amazon.com/images/I/813zj-065jL._UL1500_.jpg"
+                    image = {product.imageURL}
                 />)
                 })
             }
